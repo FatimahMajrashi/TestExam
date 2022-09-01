@@ -1,0 +1,74 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.Test;
+import java.io.File;
+import java.util.List;
+public class BootstrapDropdown {
+    @Test
+    public void BootstrapDropdown() throws Exception {
+        // System Property for Chrome Driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();// configure the Chrome driver
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--disable-notifications");//disable the notification
+        WebDriver driver = new ChromeDriver(option);// create ChromeDriver object
+        driver.get("https://www.hdfcbank.com/");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+
+        // find the xpath of the container to access the dropdown list
+        driver.findElement(By.cssSelector("div[class='bp-container c-template-portal-hero-banner-section c-hero-banner hero-mt'] div[class='container']"));
+
+        // find the xpath of the select product type in dropdown list
+        WebElement product_type = driver.findElement(By.xpath("//div[@class='drp1']//a"));
+        product_type.click();
+        Thread.sleep(3000);
+
+        // find the xpath of the selection elements for first dropdown list (select product type)
+        List<WebElement> listValues= driver.findElements(By.xpath("//ul[@class='dropdown1 dropdown-menu']"));
+        Thread.sleep(3000);
+
+        // Loop to print text for every element
+        for (WebElement webElement : listValues) {
+            System.out.println(webElement.getText());
+        }
+        Thread.sleep(2000);
+
+        // find the xpath of the selection elements "Accounts" and click into to select 
+        WebElement accountOption = driver.findElement(By.xpath("//li[normalize-space()='Accounts']"));
+        accountOption.click();
+        Thread.sleep(3000);
+
+        // find the xpath of the select product type in dropdown list
+        driver.findElement(By.xpath("//div[@class='drp2']//a[@class='btn-primary dropdown-toggle btn-block']")).click();
+        // find the xpath of the selection elements for second dropdown list (Select_product)
+        
+        List<WebElement> listValues2= driver.findElements(By.xpath("//ul[@class='dropdown2 dropdown-menu']"));
+        Thread.sleep(3000);
+        System.out.println("\n");
+        
+        // Loop to print text for every element
+        for (WebElement webElement : listValues2) {
+         System.out.println(webElement.getText());
+        }
+        Thread.sleep(2000);
+        
+        // find the xpath of the selection elements "Savings Accounts" and click into to select
+        WebElement productSelect = driver.findElement(By.xpath("//li[contains(text(),'Savings Accounts')]"));
+        productSelect.click();
+        
+        // find the xpath of the selection elements "Apply online" and click into to select
+        WebElement Apply = driver.findElement(By.xpath("//a[normalize-space()='Apply online']"));
+        Apply.click();
+        Thread.sleep(3000);
+
+        //take a screenshot of the last  result
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("C:\\Users\\user\\Desktop\\ScreenShot\\MyAccount4.png"));
+
+    }
+}
+
