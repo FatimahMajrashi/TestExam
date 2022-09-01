@@ -1,0 +1,47 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+import java.io.File;
+
+public class DatePicker {
+    @Test
+    public void DatePicker() throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        // configure the Chrome driver
+        WebDriverManager.chromedriver().setup();// System Property for Chrome Driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.get("https://www.dummyticket.com/dummy-ticket-for-visa-application/");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+        Thread.sleep(2000);
+        
+        //Scroll Down to the calendar element
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,250)");
+        
+        //find the xpath of the calendar and click into
+        driver.findElement(By.xpath("//input[@id='dob']")).click();
+
+        //find the xpath of the year using select method
+        Select Year = new Select(driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/select[2]")));
+        Year.selectByVisibleText("2022");
+        Year.selectByValue("2005");
+        Thread.sleep(2000);
+
+        //find the xpath of the month using select method
+        Select month = new Select(driver.findElement(By.xpath("//select[@aria-label='Select month']")));
+        month.selectByIndex(7);
+        month.selectByIndex(5);
+        Thread.sleep(2000);
+
+        //find the xpath of the day using select method
+        driver.findElement(By.xpath("//a[contains(text(),'30')]")).click();
+        
+        //take a screenshot of the last result
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("C:\\Users\\user\\Desktop\\ScreenShot\\Date.png"));
+    }
+}
