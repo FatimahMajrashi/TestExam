@@ -5,7 +5,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import static org.openqa.selenium.Keys.ARROW_DOWN;
-
 public class Twoplugs_Website {
     @Test
     public void Test_twoplugs() throws Exception {
@@ -15,22 +14,28 @@ public class Twoplugs_Website {
         WebDriver driver = new ChromeDriver();// create ChromeDriver object
         driver.get("https://www.twoplugs.com/");// get the url of the website
         driver.manage().window().maximize();// Maximize the Chrome browser.
+        
         // find the path of the advanced button
         driver.findElement(By.id("details-button")).click();
         // find the path of the agreement link
         driver.findElement(By.cssSelector("#proceed-link")).click();
         // find the path of the Elements LIVE POSTING and click into
         driver.findElement(By.xpath("/html/body/div/header/div/nav/ul/li[2]/a")).click();
+ 
         // find the path of the input textbox and send the vlaue "Toronto, OH, USA" then Toronto, OH, USA
-        WebElement form = driver.findElement(By.xpath("//input[@placeholder=\"Toronto,ON,Canada\"]"));
-        Thread.sleep(3000);
-        form.sendKeys("Toronto, OH, USA");
-        form.click();
-         // Note::
-        // here we can't validate the text"Toronto, OH, USA" with options selection because the dropdown 
-        // selection does not have any path or outcome it's only list powerded by google 
+        driver.findElement(By.xpath("//input[@placeholder=\"Toronto,ON,Canada\"]")).click();
+        driver.findElement(By.xpath("//input[@placeholder=\"Toronto,ON,Canada\"]")).sendKeys("Toronto, OH, USA");
+        driver.findElement(By.xpath("//input[@placeholder=\"Toronto,ON,Canada\"]")).click();
+        try {
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//input[@placeholder=\"Toronto,ON,Canada\"]")).sendKeys(Keys.ARROW_DOWN);
+        } catch (InterruptedException e) {
+            System.out.println("Error: " + e);
+        }
     }
-}
+    }
+
+
 
 
 
