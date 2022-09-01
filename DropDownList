@@ -1,0 +1,104 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+public class TestDropDown {
+    @Test
+    public void DropDown() throws Exception {
+        // System Property for Chrome Driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();// configure the Chrome driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.get("https://www.twoplugs.com/");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+        // find the path of the advanced button
+        driver.findElement(By.id("details-button")).click();
+        // find the path of the agreement link
+        driver.findElement(By.cssSelector("#proceed-link")).click();
+        // find the path of the Elements LIVE POSTING and click into
+        driver.findElement(By.xpath("/html/body/div/header/div/nav/ul/li[2]/a")).click();
+
+        //-----------------------------------------------------------------------------------------------
+
+        System.out.println("--------------------" + "Fist-list" + "--------------------" + "\n");
+        //capture the first List and print before sort and after
+        //Get the xpath of all options elements in dropdown list
+        Select Elements = new Select(driver.findElement(By.xpath("//select[@name='category_id']")));
+        //Create Array list and named originalList to store all elements
+        List originalList = new ArrayList();
+        //Create List of WebElement to select all option and get text using for loop
+        List<WebElement> options = Elements.getOptions();
+        for (WebElement E : options) {
+            //using the originalList array list to store all options
+            originalList.add(E.getText() + "\n");
+        }
+        //Print the elements in originalList
+        System.out.println(originalList);
+        //Create Temp list to store the elements in originalList
+        List Templist = new ArrayList();
+        //store the elements from originalList to Templist
+        Templist = originalList;
+        System.out.println("--------------------Before-Sort-The-List--------------------" + "\n" + Templist);
+        Collections.sort(Templist);
+        System.out.println("--------------------Ascending order--------------------" + "\n" + Templist);
+        Collections.reverse(Templist);
+        System.out.println("--------------------Descending_Order--------------------" + "\n" + Templist);
+
+        //-----------------------------------------------------------------------------------------------
+
+
+        System.out.println("--------------------" + "Second-List" + "--------------------" + "\n");
+        //capture the Second List and print before sort and after
+        //Get the xpath of all options elements in dropdown list
+        Select Elements2 = new Select(driver.findElement(By.xpath("(//select)[2]")));
+        //Create List of WebElement to select all option and get text using for loop
+        List originalList2 = new ArrayList();
+        List<WebElement> options1 = Elements2.getOptions();
+        for (WebElement E2 : options1) {
+            //using the originalList2 array list to store all options
+            originalList2.add(E2.getText() + "\n");
+        }
+        //Print the elements in originalList2
+        System.out.println(originalList2);
+        //Create Temp list to store the elements in originalList2
+        List Templist2 = new ArrayList();
+        //store the elements from originalList2 to Templist2
+        Templist2 = originalList2;
+        System.out.println("--------------------Before-Sort-The-List--------------------" + "\n" + Templist2);
+        Collections.sort(Templist2);
+        System.out.println("--------------------Ascending_Order--------------------" + "\n" + Templist2);
+        Collections.reverse(Templist2);
+        System.out.println("--------------------Descending_Order--------------------" + "\n" + Templist2);
+
+        //-----------------------------------------------------------------------------------------------
+
+        System.out.println("--------------------"+"Third-List"+"--------------------"+"\n");
+        //capture the Third List and print before sort and after
+        //Get the xpath of all options elements in dropdown list
+        Select Elements3 = new Select(driver.findElement(By.xpath("(//select[@onchange='jQuery(\"#sort\").val(jQuery(this).val());jQuery(\"#filterForm\").submit()'])[1]\n")));
+        //Create List of WebElement to select all option and get text using for loop
+        List originalList3 = new ArrayList();
+        List<WebElement> options3 = Elements3.getOptions();
+        //using the originalList3 array list to store all options
+        for (WebElement E3 : options3 ) {
+            //using the originalList3 array list to store all options
+            originalList3.add(E3.getText()+"\n");
+        }
+        //Print the elements in originalList3
+        System.out.println(originalList3);
+        List Templist3 = new ArrayList();
+        //store the elements from originalList3 to Templist3
+        Templist3=originalList3;
+        System.out.println("--------------------Before-Sort-The-List--------------------"+"\n"+Templist3);
+        Collections.sort(Templist3);
+        System.out.println("--------------------Ascending_Order--------------------"+"\n"+Templist3);
+        Collections.reverse(Templist3);
+        System.out.println("--------------------Descending_Order--------------------"+"\n"+Templist3);
+    }
+
+}
