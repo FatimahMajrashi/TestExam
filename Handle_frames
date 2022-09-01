@@ -1,0 +1,46 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.IOException;
+
+public class Handle_frames {
+    @Test
+    public void Handle_frames() throws InterruptedException, IOException {
+        // System Property for Chrome Driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();// configure the Chrome driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.get("https://www.selenium.dev/selenium/docs/api/java/index.html?overview-summary.html");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+        
+        // find the path of the first frame and switch into
+        driver.switchTo().frame(driver.findElement(By.xpath("//body/main[1]/div[1]/div[1]/div[1]/iframe[1]")));
+        driver.switchTo().defaultContent();
+        Thread.sleep(1500);
+        
+        // find the path of the second frame and switch into
+        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[title='All classes and interfaces (except non-static nested types)']")));
+        driver.switchTo().defaultContent();
+        Thread.sleep(1500);
+        
+        // find the path of the third frame and switch into
+        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[title='Package, class and interface descriptions']")));
+        Thread.sleep(2000);
+        
+        // find the path of the selected element
+        WebElement selectText = driver.findElement(By.cssSelector("a[href='org/openqa/selenium/package-summary.html']"));
+        selectText.click();
+        Thread.sleep(2000);
+        
+        //take a screenshot of the last result
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("C:\\Users\\user\\Desktop\\ScreenShot\\iframe.png"));
+
+
+    }
+}
