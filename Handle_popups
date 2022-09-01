@@ -1,0 +1,46 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class Handle_popups {
+
+    @Test
+    public void Handle_popups() throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        // configure the Chrome driver
+        WebDriverManager.chromedriver().setup();// System Property for Chrome Driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+        Thread.sleep(9000); // waiting time 3 seconds
+        
+        //Note****
+        /*Here the idea of this question is how to pass the username and password to 
+        pop alert , I try many times to take the xpath of the element but there is no
+        xpath for element, so I'm searching for way to do that I found that we can pass 
+        the value using the link of the website as string ^^
+        */
+         
+        //identify string name "admin"
+        String username = "admin";
+        //identify string psaword "admin"
+        String password = "admin";
+        
+        // Creating string identifier of url and passing the value into then go open url
+        String URL = "https://" + username + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth";
+        driver.get(URL);
+        
+        //find the path of the text "Congratulations! You must have the proper credentials"
+        String text = driver.findElement(By.tagName("p")).getText();
+        Thread.sleep(3000);
+        
+        //Assert method using to make sure the Expected and actual is equal
+        Assert.assertEquals("Congratulations! You must have the proper credentials.", text);
+        System.out.println(text);
+        driver.quit();
+    }
+
+}
