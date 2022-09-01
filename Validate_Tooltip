@@ -1,0 +1,43 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
+import java.util.concurrent.TimeUnit;
+public class Validate_Tooltip {
+    @Test
+    public void Validate_Tooltip () throws Exception {
+        // configure the Chrome driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();// System Property for Chrome Driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.get("https://jqueryui.com/tooltip/");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+        //implicit wait
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //maximize browser
+        driver.manage().window().maximize();
+        // launch Vjqueryui Website
+        driver.get("https://jqueryui.com/tooltip/");
+        // identify frame by using the xpath and  switch into the age element
+        WebElement frame = driver.findElement(By.className("demo-frame"));
+        driver.switchTo().frame(frame);
+        //identify age element by using the xpath
+        WebElement age = driver.findElement(By.xpath("//input[@id='age']"));
+        age.click();
+        //Using the JavaScript Executor scroll to element with
+        JavascriptExecutor j_s = (JavascriptExecutor) driver;
+        j_s.executeScript("arguments[0].scrollIntoView(true);", age);
+        // Create object of Actions and using the method moveToElement
+        Actions action = new Actions(driver);
+        action.moveToElement(age).perform();
+        //identify the tooltip element by using the xpath
+        WebElement hiddin = driver.findElement(By.xpath("//div[@class='ui-helper-hidden-accessible']"));
+        //identify type string named text and get text of tooltip
+        String text = hiddin.getText();
+        //Assert method using to make sure the Expected and actual is equal
+        Assert.assertEquals("We ask for your age only for statistical purposes.", text);
+    }
+}
