@@ -1,0 +1,43 @@
+package Testing;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+public class Suggest_Dropdown {
+    @Test
+    public void Suggest_Dropdown() throws Exception {
+        // System Property for Chrome Driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();// configure the Chrome driver
+        WebDriver driver = new ChromeDriver();// create ChromeDriver object
+        driver.get("https://www.google.com.sa/");// get the url of the website
+        driver.manage().window().maximize();// Maximize the Chrome browser.
+
+        ////implicit wait
+        driver.manage().timeouts().implicitlyWait(20000, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20000, TimeUnit.SECONDS);
+
+        //find the path of the input search and send value"java tutorial""
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/input[1]")).sendKeys("java tutorial");
+
+        //Create a list to elements by using the xpath
+        List<WebElement> list_Select = driver.findElements(By.xpath("//ul[@role='listbox']//ul[@role='listbox']//descendant::div[@class='wM6W7d']"));
+
+        Thread.sleep(10000);
+        //Creating List Size to move for every element ib for loop
+        list_Select.size();
+        // for loop to capture all suggestion elements and comparing the "w3schools" text with elements
+        for (int i = 0; i < list_Select.size(); i++) {
+            System.out.println(list_Select.get(i).getText());
+            Thread.sleep(3000);
+                if (list_Select.get(i).getText().contains("w3schools")) {
+                list_Select.get(i).click();
+                break;
+            }
+        }
+
+    }
+}
+
