@@ -34,9 +34,6 @@ public class Twoplugs_Website {
         }
     }
     }
-
-
-
-
-
-
+  //------------------------------------------------------------------------------------------------------------------------------------------ 
+ //****Note**** We can't complete  testing this testcase and validate the Toronto, OH, USA input with the selection result becouse it is powered by google
+ 
