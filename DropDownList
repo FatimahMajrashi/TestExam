@@ -10,9 +10,9 @@ import java.util.List;
 public class TestDropDown {
     @Test
     public void DropDown() throws Exception {
-        // System Property for Chrome Driver
+       // configure the Chrome driver 
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
-        WebDriverManager.chromedriver().setup();// configure the Chrome driver
+        WebDriverManager.chromedriver().setup(); // System Property for Chrome Driver
         WebDriver driver = new ChromeDriver();// create ChromeDriver object
         driver.get("https://www.twoplugs.com/");// get the url of the website
         driver.manage().window().maximize();// Maximize the Chrome browser.
