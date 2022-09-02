@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.openqa.selenium.Keys.ARROW_DOWN;
 public class Twoplugs_Website {
     @Test
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public void Test_twoplugs() throws Exception {
         // System Property for Chrome Driver
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
         WebDriverManager.chromedriver().setup();// configure the Chrome driver
