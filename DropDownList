@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 public class TestDropDown {
     @Test
-    public void DropDown() throws Exception {
+    public static void main(String[] args) throws InterruptedException, IOException {
        // configure the Chrome driver 
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
         WebDriverManager.chromedriver().setup(); // System Property for Chrome Driver
