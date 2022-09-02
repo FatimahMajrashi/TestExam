@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 public class Suggest_Dropdown {
     @Test
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public void Suggest_Dropdown() throws Exception {
         // System Property for Chrome Driver
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
         WebDriverManager.chromedriver().setup();// configure the Chrome driver
