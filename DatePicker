@@ -9,7 +9,7 @@ import java.io.File;
 
 public class DatePicker {
     @Test
-    public void DatePicker() throws Exception {
+    public static void main(String[] args) throws InterruptedException, IOException {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
         // configure the Chrome driver
         WebDriverManager.chromedriver().setup();// System Property for Chrome Driver
