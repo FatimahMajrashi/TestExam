@@ -40,7 +40,7 @@ public class Suggest_Dropdown {
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File("C:\\Users\\user\\Desktop\\ScreenShot\\Google.png"));
         }
-         //this Test is fail because it doesn't found the w3schools in outo suggest list 
+        //it doesn't found the w3schools in outo suggest listt 
 
         }
 
