@@ -61,8 +61,8 @@ public class BootstrapDropdown {
         productSelect.click();
         
         // find the xpath of the selection elements "Apply online" and click into to select
-        WebElement Apply = driver.findElement(By.xpath("//a[normalize-space()='Apply online']"));
-        Apply.click();
+       // WebElement Apply = driver.findElement(By.xpath("//a[normalize-space()='Apply online']"));
+        //Apply.click();
         Thread.sleep(3000);
 
         //take a screenshot of the last  result
